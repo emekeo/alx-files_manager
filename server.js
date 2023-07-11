@@ -1,11 +1,12 @@
 import express from 'express';
-import consign from 'consign';
+import startServer from './libs/boot';
+import injectRoutes from './routes';
+import injectMiddlewares from './libs/middlewares';
 
 const server = express();
 
-consign()
-  .include('routes')
-  .then('libs/boot.js')
-  .into(server);
+injectMiddleware(server);
+injectRoutes(server);
+startServer(server);
 
 export default server;
